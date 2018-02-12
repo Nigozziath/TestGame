@@ -81,6 +81,7 @@ class InputManagerTest {
 			e.printStackTrace();
 		}
 		
+		//Test if the player is at the center of the window
 		if ((player.getxLocation() - Game.windowWidth / 2 > player.getDistanceSensibility())
 				|| 
 				(player.getyLocation() - Game.windowHeight / 2 > player.getDistanceSensibility())

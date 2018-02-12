@@ -1,5 +1,11 @@
 package main;
 
+/**
+ * 
+ * @author Romain
+ *
+ * A thread that run the game loop
+ */
 public class GameThread extends Thread {
 
 	// reference to the game
@@ -20,7 +26,7 @@ public class GameThread extends Thread {
 			  try {
 				  
 				  //execute the actions of the frame
-				  game.resolveAFrame ();
+				  game.resolveCurrentFrame ();
  
 				  // calculate the time before the next frame
 				  long timeToWaitUntillTheNextFrame = 1000 / Game.framePerSecond // normal time interval between each frame 

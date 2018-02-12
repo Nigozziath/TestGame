@@ -79,9 +79,9 @@ public class Game {
 	  }
 
 	/**
-	 * execute all the actions for a game frame
+	 * Execute all the actions for a game frame
 	 */
-	public void resolveAFrame () {
+	public void resolveCurrentFrame () {
 		
 		// update current game time
   	  this.currentGameTime = System.currentTimeMillis() - this.startTime ;
