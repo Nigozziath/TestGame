@@ -5,9 +5,9 @@ If you touch one red circle it's game over.
 
 ### Controls 
 
-Use the mouse to control the blue circle. /n
-Press and maintain the left mouse bouton down, the blue circle will follow your mouse at a fix speed. /n
-Release the left mouse bouton and the blue circle will stop moving. 
+Use the mouse to control the blue circle. <br />
+Press and maintain the left mouse bouton down, the blue circle will follow your mouse at a fix speed. <br />
+Release the left mouse bouton and the blue circle will stop moving. <br />
 
 ### Credits
 
