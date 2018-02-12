@@ -71,6 +71,7 @@ public class InputManager implements MouseListener, MouseMotionListener, Tickabl
 
 	@Override
 	public void tick() {
+		
 		if (this.isMousePressed) {
 			//if the mouse is pressed apply speed to the player
 			this.player.applySpeed(mouseXPos, mouseYPos);

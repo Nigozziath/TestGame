@@ -35,7 +35,8 @@ public class GamePanel extends JPanel{
 	    	
 	    	// draw the actor using its location, size and color
 	    	g.setColor(act.getColor());
-	    	g.fillOval((int) (act.getxLocation() - act.getSize() / 2 ), (int) (act.getyLocation() - act.getSize() ) , (int) act.getSize(), (int) act.getSize());
+	    	g.fillOval((int) (act.getxLocation() - act.getSize() /2), (int) (act.getyLocation() - act.getSize() /2) , (int) act.getSize(), (int) act.getSize());
+
 	    }
 	    
 	    // if the game is over, print "game over"

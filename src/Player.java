@@ -33,7 +33,7 @@ public class Player extends Actor{
 	 * @param mouseYLoc, mouse position in y coordinates
 	 */
 	public void applySpeed(int mouseXLoc, int mouseYLoc) {
-		
+
 		// position delta in x and y coordinates
 		float xDelta = mouseXLoc -  this.xLocation;
 		float yDelta = mouseYLoc -  this.yLocation;

@@ -50,10 +50,10 @@ public class Game {
 		this.player = new Player(this.frame.getWidth()/2 , this.frame.getHeight()/2, this);
 		this.gameActors.add(this.player); 
 		
-		//create input manager and adds it to the mouse listener list
+		//create input manager and adds it to the mouse listener list of the game panel
 		this.inputManager = new InputManager(this.player);
-		this.frame.addMouseListener((MouseListener) this.inputManager);
-		this.frame.addMouseMotionListener((MouseMotionListener) this.inputManager);
+		this.panel.addMouseListener((MouseListener) this.inputManager);
+		this.panel.addMouseMotionListener((MouseMotionListener) this.inputManager);
 		
 		//create enemySpawner
 		this.enemySpawner = new EnemySpawner(this);
@@ -83,8 +83,10 @@ public class Game {
 	    	  this.panel.repaint();
 	    	  
 	    	  // sleep until the next frame
-	    	  Thread.sleep(1000 / framePerSecond);
-
+	    	  Thread.sleep(1000 / framePerSecond - 
+	    			  (System.currentTimeMillis() - (this.startTime + this.currentGameTime)) 
+	    			  ); // a small time correction in case of the frame take time to resolve 
+	    	  
 	      } catch (InterruptedException e) {
 	        e.printStackTrace();
 	      }
@@ -115,18 +117,11 @@ public class Game {
   	  // make the input manager tick
   	  this.inputManager.tick();
   	  
-  	  // for all the actors, make them tick and check collision with the player
+  	  // for all the actors, make them tick 
   	  for (Actor act : gameActors) {
   		  if (act != null) {
-  			  
     		  // make the actor tick
     		  act.tick() ;
-  			  
-  			  // check if the enemy is colliding with the player
-    		  if (act.getClass().isAssignableFrom(Enemy.class)) {
-    			  this.checkPlayerCollision((Enemy)act);
-    			  
-    		  }
   		  }
   	  }
   	  
@@ -136,12 +131,24 @@ public class Game {
   			  this.gameActors.remove(act);
   		  }
   	  }
+  	  
   	  // then clears gameActorsToDestroy set
   	  this.gameActorsToDestroy.clear();
   	  
-  	  
   	  // make the enemy Spawner tick
   	  this.enemySpawner.tick();
+  	  
+  	  // check collision with the player for all remaining enemies
+	  for (Actor act : gameActors) {
+		  if (act != null) {
+			  
+			  // check if the enemy is colliding with the player
+			  if (act.getClass().isAssignableFrom(Enemy.class)) {
+				  this.checkPlayerCollision((Enemy)act);  
+			  }
+		  }
+	  }
+
 	}
 	
 	/**
@@ -160,7 +167,7 @@ public class Game {
 		// the sum of their ray (half of their size)
 		float sizeSum = enemy.getSize() / 2 + this.player.getSize() / 2;
 		
-		// is the distance is lesser than the sum of the rays, the two are colliding
+		// if the distance is lesser than the sum of the rays, the two are colliding
 		if (distanceBetween < sizeSum) {
 			// game over !
 			// stop the game loop

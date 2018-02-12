@@ -19,7 +19,7 @@ public class Actor implements Tickable{
 	//represents the speed of the actor in y coordinates
 	protected float ySpeed = 0f ;
 	
-	//Actor's aspect is a circle, here are its size and color
+	//Actor's aspect is a circle, here are its size (diameter)  and color
 	protected float size ;
 	protected Color color ;
 	
