@@ -1,3 +1,4 @@
+package main;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -12,12 +13,12 @@ public class InputManager implements MouseListener, MouseMotionListener, Tickabl
 	// mouse position in x and y coordinates
 	private int mouseXPos = 0;
 	private int mouseYPos = 0;
-	
+
 	// true if the mouse is pressed
 	private boolean isMousePressed = false ;
 	
 	//the player to control
-	protected Player player;
+	private Player player;
 	
 	/**
 	 * Constructor
@@ -82,4 +83,35 @@ public class InputManager implements MouseListener, MouseMotionListener, Tickabl
 		}
 	}
 
+	public int getMouseXPos() {
+		return mouseXPos;
+	}
+
+	public void setMouseXPos(int mouseXPos) {
+		this.mouseXPos = mouseXPos;
+	}
+
+	public int getMouseYPos() {
+		return mouseYPos;
+	}
+
+	public void setMouseYPos(int mouseYPos) {
+		this.mouseYPos = mouseYPos;
+	}
+
+	public boolean isMousePressed() {
+		return isMousePressed;
+	}
+
+	public void setMousePressed(boolean isMousePressed) {
+		this.isMousePressed = isMousePressed;
+	}
+	
+	public Player getPlayer() {
+		return player;
+	}
+
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
 }

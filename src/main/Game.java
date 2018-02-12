@@ -1,3 +1,4 @@
+package main;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.HashSet;
@@ -36,6 +37,8 @@ public class Game {
 	// set of actors to be removed from the gameActors set (when out of bound)
 	private HashSet<Actor> gameActorsToDestroy = new HashSet<Actor>();
 	
+	//the Thread that is running the game loop
+	private GameThread gameThread ;
 	private boolean isGameLoopRunning = false ;
 	
 	/**
@@ -67,32 +70,29 @@ public class Game {
 	 */
 	public void startGameLoop(){
 
+		//create a new thread to start the game loop
+		gameThread = new GameThread(this, "GameThread");
+		gameThread.start();
+		
 		this.isGameLoopRunning = true ;
 		
-	    while(isGameLoopRunning) // game loop
-	    {
-	      try {
-	    	  
-	    	  // update current game time
-	    	  this.currentGameTime = System.currentTimeMillis() - this.startTime ;
-
-	    	  // make tick the input manager, the enemy spawner and all actors
-	    	  this.makeTickAllTickables();
-
-	    	  // make the game panel update the display
-	    	  this.panel.repaint();
-	    	  
-	    	  // sleep until the next frame
-	    	  Thread.sleep(1000 / framePerSecond - 
-	    			  (System.currentTimeMillis() - (this.startTime + this.currentGameTime)) 
-	    			  ); // a small time correction in case of the frame take time to resolve 
-	    	  
-	      } catch (InterruptedException e) {
-	        e.printStackTrace();
-	      }
-	    }
 	  }
 
+	/**
+	 * execute all the actions for a game frame
+	 */
+	public void resolveAFrame () {
+		
+		// update current game time
+  	  this.currentGameTime = System.currentTimeMillis() - this.startTime ;
+
+  	  // make tick the input manager, the enemy spawner and all actors
+  	  this.makeTickAllTickables();
+
+  	  // make the game panel update the display
+  	  this.panel.repaint();
+	}
+	
 	/**
 	 * Instantiate game frame and panel
 	 */
@@ -255,6 +255,30 @@ public class Game {
 
 	public void setGameActorsToDestroy(HashSet<Actor> gameActorsToDestroy) {
 		this.gameActorsToDestroy = gameActorsToDestroy;
+	}
+
+	public InputManager getInputManager() {
+		return inputManager;
+	}
+
+	public void setInputManager(InputManager inputManager) {
+		this.inputManager = inputManager;
+	}
+
+	public GameThread getGameThread() {
+		return gameThread;
+	}
+
+	public void setGameThread(GameThread gameThread) {
+		this.gameThread = gameThread;
+	}
+
+	public boolean isGameLoopRunning() {
+		return isGameLoopRunning;
+	}
+
+	public void setGameLoopRunning(boolean isGameLoopRunning) {
+		this.isGameLoopRunning = isGameLoopRunning;
 	}    
 	
 }

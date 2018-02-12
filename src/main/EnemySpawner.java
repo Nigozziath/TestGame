@@ -1,3 +1,4 @@
+package main;
 import java.util.Random;
 
 /**
@@ -93,5 +94,37 @@ public class EnemySpawner implements Tickable{
 		}
 		
 		game.getGameActors().add(new Enemy(initialXPos, initialYPos, initialXSpeed, initialYSpeed, this.game));
+	}
+
+	public long getTimeBetweenEachSpawn() {
+		return timeBetweenEachSpawn;
+	}
+
+	public void setTimeBetweenEachSpawn(long timeBetweenEachSpawn) {
+		this.timeBetweenEachSpawn = timeBetweenEachSpawn;
+	}
+
+	public long getLastTimeSpawn() {
+		return lastTimeSpawn;
+	}
+
+	public void setLastTimeSpawn(long lastTimeSpawn) {
+		this.lastTimeSpawn = lastTimeSpawn;
+	}
+
+	public float getInitialEnemySpeed() {
+		return initialEnemySpeed;
+	}
+
+	public void setInitialEnemySpeed(float initialEnemySpeed) {
+		this.initialEnemySpeed = initialEnemySpeed;
+	}
+
+	public Game getGame() {
+		return game;
+	}
+
+	public void setGame(Game game) {
+		this.game = game;
 	}
 }
