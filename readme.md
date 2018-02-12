@@ -1,7 +1,7 @@
 ### Objective of the game
 
-In this game you are a blue circle that have to avoid the red circles that spawn out of the window.
-If you touch one red circle it's game over.
+In this game you are a blue circle that have to avoid the red circles that spawn out of the window.<br />
+If you touch one red circle it's game over.<br />
 
 ### Controls 
 
