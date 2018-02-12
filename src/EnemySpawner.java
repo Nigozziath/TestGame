@@ -3,19 +3,26 @@ import java.util.Random;
 /**
  * 
  * @author Romain
- * Spawns Enemies
+ * 
+ * Spawns Enemies at time intervals
  */
 public class EnemySpawner implements Tickable{
 
 	//times in milliseconds
-	private long timeBetweenEachSpawn = 650;
+	//duration between each enemy spawn
+	private long timeBetweenEachSpawn = 500;
+	//last time an enemy was spawned
 	private long lastTimeSpawn = 0;
 	
 	private float initialEnemySpeed = 225f ;
 	
-	// ref to the game to have access to the game time
+	// reference to the game to have access to the game time
 	private Game game ;
 	
+	/**
+	 * Constructor
+	 * @param game, reference to the game
+	 */
 	public EnemySpawner (Game game) {
 		this.game = game;
 	}
@@ -23,19 +30,24 @@ public class EnemySpawner implements Tickable{
 	@Override
 	public void tick() {
 		
-		// timer check, if waited long enough make an enemy spawn
+		// time check, if waited long enough make an enemy spawn
 		if (game.getCurrentGameTime() > this.lastTimeSpawn + this.timeBetweenEachSpawn) {
 			this.spawnEnemy();
 			this.lastTimeSpawn = game.getCurrentGameTime() ;
 			
 			// increase difficulty by reducing the time between each spawn
-			if (game.getCurrentGameTime() > 5f ) {
+			if (game.getCurrentGameTime() < 25 * 000) { 
 				timeBetweenEachSpawn *= 0.99 ;
+			} else { // after 25 seconds reduce difficulty increase
+				timeBetweenEachSpawn *= 0.995 ; 
 			}
 		}
 		
 	}
 	
+	/**
+	 * Spawn an enemy from a random border
+	 */
 	public void spawnEnemy() {		
 		
 		float initialXPos = 0 ;

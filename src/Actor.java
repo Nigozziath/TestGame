@@ -1,5 +1,12 @@
 import java.awt.Color;
 
+/**
+ * 
+ * @author Romain
+ *
+ * represent a physical element of the game that can be displayed
+ * for the purpose of this game, its aspect is a circle
+ */
 public class Actor implements Tickable{
 
 	//represents the location of the actor in x coordinates

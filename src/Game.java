@@ -28,17 +28,20 @@ public class Game {
 	private GamePanel panel;
 	
 	// Tickables
-	private HashSet<Actor> gameActors = new HashSet<Actor>();
-	private HashSet<Actor> gameActorsToDestroy = new HashSet<Actor>();
 	private InputManager inputManager;
 	private Player player ;
 	private EnemySpawner enemySpawner;
+	// set of actors to be update and displayed
+	private HashSet<Actor> gameActors = new HashSet<Actor>();
+	// set of actors to be removed from the gameActors set (when out of bound)
+	private HashSet<Actor> gameActorsToDestroy = new HashSet<Actor>();
 	
 	private boolean isGameLoopRunning = false ;
 	
+	/**
+	 * Constructor, initialize the whole game
+	 */
 	public Game() {
-		
-		//initialize the whole game
 		
 		//initialize graphic components
 		this.initializeGraphicComponents() ;
@@ -60,7 +63,7 @@ public class Game {
 	}
 	
 	/**
-	 * make the game loop starts
+	 * Make the game loop starts
 	 */
 	public void startGameLoop(){
 
@@ -88,8 +91,10 @@ public class Game {
 	    }
 	  }
 
-	
-	public void initializeGraphicComponents () {
+	/**
+	 * Instantiate game frame and panel
+	 */
+	private void initializeGraphicComponents () {
 		
 		//Initialize frame and panel
 		
@@ -101,6 +106,10 @@ public class Game {
 		this.frame.setContentPane(panel);
 	}
 	
+	/**
+	 * Make all Tickables tick and check player collision with enemies.
+	 * Handle out of bound enemy destruction too.
+	 */
 	private void makeTickAllTickables() {
 
   	  // make the input manager tick
@@ -109,12 +118,15 @@ public class Game {
   	  // for all the actors, make them tick and check collision with the player
   	  for (Actor act : gameActors) {
   		  if (act != null) {
-  			  // check if the player is colliding with an enemy
-    		  if (act.getClass().isAssignableFrom(Enemy.class)) {
-    			  this.checkPlayerCollision((Enemy)act);
-    		  }
+  			  
     		  // make the actor tick
     		  act.tick() ;
+  			  
+  			  // check if the enemy is colliding with the player
+    		  if (act.getClass().isAssignableFrom(Enemy.class)) {
+    			  this.checkPlayerCollision((Enemy)act);
+    			  
+    		  }
   		  }
   	  }
   	  
@@ -132,7 +144,7 @@ public class Game {
   	  this.enemySpawner.tick();
 	}
 	
-	/*
+	/**
 	 * Check if the player is colliding with an enemy
 	 * @param enemy is the enemy for the collision check
 	 */

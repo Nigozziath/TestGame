@@ -8,7 +8,7 @@ import javax.swing.JPanel;
  * 
  * @author Romain
  *
- * Panel that display all actors of the game
+ * Panel that display all actors of the game at each frame
  */
 
 public class GamePanel extends JPanel{
